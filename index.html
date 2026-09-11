@@ -240,51 +240,59 @@
             <h2 class="font-heading text-3xl md:text-4xl font-bold text-foreground">Schedule a Free Call</h2>
             <p class="mt-4 text-muted-foreground font-body max-w-md mx-auto">Tell us a bit about you and your dog. We'll reach out to find a time that works for you.</p>
           </div>
-          <form id="contactForm" class="bg-card border border-border/50 rounded-2xl p-8 md:p-10 space-y-6 shadow-sm" style="opacity: 1; transform: none;">
+          <form id="contactForm" method="POST" action="https://api.web3forms.com/submit" class="bg-card border border-border/50 rounded-2xl p-8 md:p-10 space-y-6 shadow-sm" style="opacity: 1; transform: none;">
+            <!-- Web3Forms configuration. Access key is public by design; manage it at web3forms.com -->
+            <input type="hidden" name="access_key" value="de448bb9-9041-4bb1-9f7c-fb80726c47db">
+            <input type="hidden" name="subject" value="New Free Call Request - Sollei Canine Academy">
+            <input type="hidden" name="from_name" value="Sollei Canine Academy Website">
+            <!-- Honeypot: hidden from people, filled in by bots -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off">
+
             <div class="grid md:grid-cols-2 gap-5">
               <div class="space-y-2">
-                <label class="font-body text-sm font-medium">Full Name *</label>
-                <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" required placeholder="Jane Smith">
+                <label for="cf-name" class="font-body text-sm font-medium">Full Name *</label>
+                <input id="cf-name" name="name" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" required placeholder="Jane Smith">
               </div>
               <div class="space-y-2">
-                <label class="font-body text-sm font-medium">Email *</label>
-                <input type="email" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" required placeholder="jane@email.com">
+                <label for="cf-email" class="font-body text-sm font-medium">Email *</label>
+                <input id="cf-email" name="email" type="email" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" required placeholder="jane@email.com">
               </div>
             </div>
             <div class="grid md:grid-cols-2 gap-5">
               <div class="space-y-2">
-                <label class="font-body text-sm font-medium">Phone *</label>
-                <input type="tel" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" required placeholder="(555) 123-4567">
+                <label for="cf-phone" class="font-body text-sm font-medium">Phone *</label>
+                <input id="cf-phone" name="phone" type="tel" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" required placeholder="(555) 123-4567">
               </div>
               <div class="space-y-2">
-                <label class="font-body text-sm font-medium">Service Interest</label>
-                <select class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body">
+                <label for="cf-service" class="font-body text-sm font-medium">Service Interest</label>
+                <select id="cf-service" name="service_interest" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body">
                   <option value="" disabled selected>Select a service</option>
-                  <option value="essentials">The Essentials Program</option>
-                  <option value="freedom">The Freedom Program</option>
-                  <option value="perfect_start">The Perfect Start Program</option>
-                  <option value="other">Other / Not Sure</option>
+                  <option value="The Essentials Program">The Essentials Program</option>
+                  <option value="The Freedom Program">The Freedom Program</option>
+                  <option value="The Perfect Start Program">The Perfect Start Program</option>
+                  <option value="Other / Not Sure">Other / Not Sure</option>
                 </select>
               </div>
             </div>
             <div class="grid md:grid-cols-2 gap-5">
               <div class="space-y-2">
-                <label class="font-body text-sm font-medium">Dog's Name</label>
-                <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" placeholder="Buddy">
+                <label for="cf-dog-name" class="font-body text-sm font-medium">Dog's Name</label>
+                <input id="cf-dog-name" name="dog_name" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" placeholder="Buddy">
               </div>
               <div class="space-y-2">
-                <label class="font-body text-sm font-medium">Dog's Breed</label>
-                <input class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" placeholder="Golden Retriever">
+                <label for="cf-dog-breed" class="font-body text-sm font-medium">Dog's Breed</label>
+                <input id="cf-dog-breed" name="dog_breed" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body" placeholder="Golden Retriever">
               </div>
             </div>
             <div class="space-y-2">
-              <label class="font-body text-sm font-medium">Anything else we should know?</label>
-              <textarea class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body min-h-[100px] resize-none" placeholder="Tell us about your goals, challenges, or any questions..."></textarea>
+              <label for="cf-message" class="font-body text-sm font-medium">Anything else we should know?</label>
+              <textarea id="cf-message" name="message" class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body min-h-[100px] resize-none" placeholder="Tell us about your goals, challenges, or any questions..."></textarea>
             </div>
             <button type="submit" class="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-body font-medium text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-60">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send w-4 h-4"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
               Submit Request
             </button>
+            <p id="formResult" class="font-body text-sm text-center" role="status" aria-live="polite" style="display: none;"></p>
           </form>
         </div>
       </section>
@@ -348,19 +356,65 @@
       }
     }
 
-    // Simple form submission handler
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = this.querySelector('button[type="submit"]');
-      btn.textContent = 'Request Submitted!';
-      btn.disabled = true;
-      btn.style.opacity = '0.6';
-      setTimeout(function() {
-        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send w-4 h-4"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg> Submit Request';
-        btn.disabled = false;
-        btn.style.opacity = '1';
-      }, 3000);
-    });
+    // Web3Forms submission handler
+    (function () {
+      var form = document.getElementById('contactForm');
+      var result = document.getElementById('formResult');
+      var btn = form.querySelector('button[type="submit"]');
+      var btnHTML = btn.innerHTML;
+
+      function showResult(message, ok) {
+        result.textContent = message;
+        result.style.display = 'block';
+        result.style.color = ok ? 'var(--primary)' : '#b42318';
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        result.style.display = 'none';
+
+        var data = Object.fromEntries(new FormData(form));
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+          .then(function (response) {
+            return response.json().then(function (json) {
+              return { ok: response.ok, json: json };
+            });
+          })
+          .then(function (res) {
+            if (res.ok) {
+              form.reset();
+              btn.textContent = 'Request Submitted!';
+              showResult("Thanks! We've got your request and will be in touch shortly.", true);
+            } else {
+              btn.innerHTML = btnHTML;
+              btn.disabled = false;
+              showResult(res.json.message || 'Something went wrong. Please try again.', false);
+            }
+          })
+          .catch(function () {
+            btn.innerHTML = btnHTML;
+            btn.disabled = false;
+            showResult('Something went wrong. Please email us instead.', false);
+          })
+          .then(function () {
+            setTimeout(function () {
+              btn.innerHTML = btnHTML;
+              btn.disabled = false;
+            }, 5000);
+          });
+      });
+    })();
   </script>
 </body>
 </html>
