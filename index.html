@@ -40,6 +40,37 @@
                   width: 44px; height: 44px; border-radius: 9999px;
                   background: hsl(var(--card)); border: 1px solid hsl(var(--accent) / .55);
                   display: flex; align-items: center; justify-content: center; }
+    /* Hero. The photo is portrait, so at phone widths object-cover shows its
+       full height and puts the trainer and dogs squarely behind the vertically
+       centred copy. Below md the section becomes a column: the photo takes
+       whatever room the copy leaves, and the copy rides an opaque card lapping
+       over its bottom edge. Nothing here touches the md-and-up layout. */
+    .hero-eyebrow { display: none; }
+    @media (max-width: 767px) {
+      .hero        { flex-direction: column; align-items: stretch; padding-top: 0;
+                     min-height: 100svh; }
+      /* Out of absolute flow, so it can share the column with the card. A zero
+         flex-basis is the load-bearing bit: left on auto, the basis becomes the
+         portrait photo's natural height at this width (518px) and the card gets
+         pushed off the bottom of the screen. At zero the photo takes only the
+         room the card leaves, and the min-height keeps it from collapsing if
+         the copy ever runs long. */
+      .hero-media  { position: relative; inset: auto; flex: 1 1 0; min-height: 12rem; }
+      .hero-img    { object-position: center 30%; }
+      /* Top-down instead of left-right: just enough to carry the translucent
+         nav, which the photo now runs behind. */
+      .hero-scrim  { background: linear-gradient(to bottom, hsl(var(--foreground) / .45), transparent 34%); }
+      .hero-body   { flex: none; z-index: 20; max-width: none; margin: -1.75rem 0 0;
+                     padding: 1.875rem 1.5rem 2rem; background: hsl(var(--card));
+                     border-radius: 1.25rem 1.25rem 0 0;
+                     box-shadow: 0 -8px 28px hsl(var(--foreground) / .14); }
+      .hero-inner  { max-width: none; }
+      .hero-eyebrow{ display: block; }
+      /* The copy sits on card, not on photo, so it takes the page's ink colours. */
+      .hero-title  { color: hsl(var(--foreground)); }
+      .hero-sub    { max-width: none; color: hsl(var(--muted-foreground)); }
+      .hero-ghost  { color: hsl(var(--foreground)); border-color: hsl(var(--border)); }
+    }
   </style>
 </head>
 <body>
@@ -63,18 +94,19 @@
       </nav>
 
       <!-- Hero Section -->
-      <section class="relative min-h-[90vh] flex items-center pt-16">
-        <div class="absolute inset-0">
-          <img src="assets/hero.jpg" alt="Professional dog trainer with a happy golden retriever in a sunny training field" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/50 to-transparent"></div>
+      <section class="hero relative min-h-[90vh] flex items-center pt-16">
+        <div class="hero-media absolute inset-0">
+          <img src="assets/hero.jpg" alt="Professional dog trainer with a happy golden retriever in a sunny training field" class="hero-img w-full h-full object-cover">
+          <div class="hero-scrim absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/50 to-transparent"></div>
         </div>
-        <div class="relative z-10 max-w-6xl mx-auto px-6 py-20">
-          <div class="max-w-xl" style="opacity: 1; transform: none;">
-            <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">Build a Stronger Bond With Your Dog</h1>
-            <p class="mt-6 text-lg text-white/75 font-body leading-relaxed max-w-md">Professional, science-based training that brings out the best in your dog — and strengthens the relationship you share.</p>
+        <div class="hero-body relative z-10 max-w-6xl mx-auto px-6 py-20">
+          <div class="hero-inner max-w-xl" style="opacity: 1; transform: none;">
+            <p class="hero-eyebrow text-accent font-body font-medium text-sm tracking-widest uppercase mb-3">Sollei Canine Academy</p>
+            <h1 class="hero-title font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">Build a Stronger Bond With Your Dog</h1>
+            <p class="hero-sub mt-6 text-lg text-white/75 font-body leading-relaxed max-w-md">Professional, science-based training that brings out the best in your dog — and strengthens the relationship you share.</p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
               <a href="#contact" class="group bg-accent text-accent-foreground px-7 py-3.5 rounded-lg font-body font-medium text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">Schedule a Free Call<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
-              <a href="#services" class="px-7 py-3.5 rounded-lg font-body font-medium text-base text-white border border-white/30 hover:bg-white/10 transition-colors text-center">View Services</a>
+              <a href="#services" class="hero-ghost px-7 py-3.5 rounded-lg font-body font-medium text-base text-white border border-white/30 hover:bg-white/10 transition-colors text-center">View Services</a>
             </div>
           </div>
         </div>
