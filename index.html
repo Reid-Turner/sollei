@@ -72,6 +72,9 @@
       /* The copy sits on card, not on photo, so it takes the page's ink colours. */
       .hero-title  { color: hsl(var(--foreground)); }
       .hero-sub    { max-width: none; color: hsl(var(--muted-foreground)); }
+      /* One sentence is enough on a phone; the full-stop sits outside the
+         span so the line still closes cleanly. Desktop keeps both clauses. */
+      .hero-sub-tail { display: none; }
       .hero-ghost  { background: hsl(var(--accent)); color: hsl(var(--accent-foreground));
                      border-color: transparent; }
       /* Beats Tailwind's hover:bg-white/10, which would otherwise wash the
@@ -109,7 +112,7 @@
         <div class="hero-body relative z-10 max-w-6xl mx-auto px-6 py-20">
           <div class="hero-inner max-w-xl" style="opacity: 1; transform: none;">
             <h1 class="hero-title font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"><span class="hero-em">Build</span> a Stronger <span class="hero-em">Bond</span> With Your Dog</h1>
-            <p class="hero-sub mt-6 text-lg text-white/75 font-body leading-relaxed max-w-md">Professional, science-based training that brings out the best in your dog — and strengthens the relationship you share.</p>
+            <p class="hero-sub mt-6 text-lg text-white/75 font-body leading-relaxed max-w-md">Professional, science-based training that brings out the best in your dog<span class="hero-sub-tail"> — and strengthens the relationship you share</span>.</p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
               <a href="#contact" class="hero-cta group bg-accent text-accent-foreground px-7 py-3.5 rounded-lg font-body font-medium text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">Schedule a Free Call<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
               <a href="#services" class="hero-ghost px-7 py-3.5 rounded-lg font-body font-medium text-base text-white border border-white/30 hover:bg-white/10 transition-colors text-center">View Services</a>
