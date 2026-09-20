@@ -66,20 +66,40 @@
                      border-radius: 1.25rem 1.25rem 0 0;
                      box-shadow: 0 -8px 28px hsl(var(--foreground) / .14); }
       .hero-inner  { max-width: none; }
-      /* One action in the card: the free-call CTA is carried by the fixed
-         nav on phones, so View Services takes over the accent fill. */
-      .hero-cta    { display: none; }
       /* The copy sits on card, not on photo, so it takes the page's ink colours. */
       .hero-title  { color: hsl(var(--foreground)); }
       .hero-sub    { max-width: none; color: hsl(var(--muted-foreground)); }
       /* One sentence is enough on a phone; the full-stop sits outside the
          span so the line still closes cleanly. Desktop keeps both clauses. */
       .hero-sub-tail { display: none; }
-      .hero-ghost  { background: hsl(var(--accent)); color: hsl(var(--accent-foreground));
-                     border-color: transparent; }
-      /* Beats Tailwind's hover:bg-white/10, which would otherwise wash the
-         fill out to near-nothing on tap. Matches the CTA's hover:opacity-90. */
-      .hero-ghost:hover { background: hsl(var(--accent) / .9); }
+    }
+
+    /* Brand. The mark is the dog cropped out of assets/logo2.png at its own
+       colour — nothing is recoloured or brightened for either surface. The
+       name is set rather than drawn, so the bar keeps its original 4rem and
+       the tagline stays legible at sizes where the logo file's own lettering
+       would not. Sizes are hand-written because the compiled Tailwind only
+       carries the utilities the page already used. */
+    .brand-lockup { display: flex; align-items: center; gap: .75rem; }
+    .brand-text   { display: flex; flex-direction: column; gap: .1875rem; }
+    .brand-mark   { height: 2.125rem; width: auto; display: block; }
+    .brand-name   { font-size: 1.125rem; line-height: 1; }
+    .brand-sub    { font-size: .5rem; font-weight: 600; letter-spacing: .2em; line-height: 1; }
+    @media (min-width: 768px) {
+      .brand-mark { height: 2.625rem; }
+      .brand-name { font-size: 1.375rem; }
+      .brand-sub  { font-size: .5625rem; letter-spacing: .22em; }
+    }
+    /* Same block on the footer, one step larger, with the tagline in accent
+       gold so it carries against the dark ground without touching the file. */
+    .footer-lockup { display: flex; align-items: center; gap: .875rem; }
+    .footer-text   { display: flex; flex-direction: column; gap: .25rem; }
+    .footer-mark   { height: 2.75rem; width: auto; display: block; }
+    .footer-name   { font-size: 1.375rem; line-height: 1; }
+    .footer-sub    { font-size: .5625rem; font-weight: 600; letter-spacing: .22em; line-height: 1; }
+    @media (min-width: 768px) {
+      .footer-mark { height: 3.25rem; }
+      .footer-name { font-size: 1.5rem; }
     }
   </style>
 </head>
@@ -90,16 +110,19 @@
       <!-- Navigation -->
       <nav class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div class="flex items-center gap-2.5">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dog w-7 h-7 text-primary"><path d="M11.25 16.25h1.5L12 17z"></path><path d="M16 14v.5"></path><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"></path><path d="M8 14v.5"></path><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5"></path></svg>
-            <span class="font-heading text-xl font-semibold text-foreground tracking-tight">Sollei Canine Academy</span>
+          <div class="brand-lockup">
+            <img src="assets/logo-mark.png" alt="" class="brand-mark">
+            <div class="brand-text">
+              <span class="brand-name font-heading font-semibold text-foreground">Sollei</span>
+              <span class="brand-sub font-body text-muted-foreground">CANINE ACADEMY</span>
+            </div>
           </div>
           <div class="hidden md:flex items-center gap-8 font-body text-sm">
             <a href="#services" class="text-muted-foreground hover:text-foreground transition-colors">Services</a>
             <a href="#about" class="text-muted-foreground hover:text-foreground transition-colors">About</a>
-            <a href="#contact" class="bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity inline-block">Book a Call</a>
+            <a href="#contact" class="bg-accent text-accent-foreground px-5 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity inline-block">Book a Call</a>
           </div>
-          <a href="#contact" class="md:hidden bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium">Book a Call</a>
+          <a href="#contact" class="md:hidden bg-accent text-accent-foreground px-4 py-2 rounded-lg text-sm font-medium">Book a Call</a>
         </div>
       </nav>
 
@@ -114,8 +137,7 @@
             <h1 class="hero-title font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"><span class="hero-em">Build</span> a Stronger <span class="hero-em">Bond</span> With Your Dog</h1>
             <p class="hero-sub mt-6 text-lg text-white/75 font-body leading-relaxed max-w-md">Professional, science-based training that brings out the best in your dog<span class="hero-sub-tail"> — and strengthens the relationship you share</span>.</p>
             <div class="mt-10 flex flex-col sm:flex-row gap-4">
-              <a href="#contact" class="hero-cta group bg-accent text-accent-foreground px-7 py-3.5 rounded-lg font-body font-medium text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">Schedule a Free Call<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
-              <a href="#services" class="hero-ghost px-7 py-3.5 rounded-lg font-body font-medium text-base text-white border border-white/30 hover:bg-white/10 transition-colors text-center">View Services</a>
+              <a href="#services" class="bg-accent text-accent-foreground px-7 py-3.5 rounded-lg font-body font-medium text-base hover:opacity-90 transition-opacity text-center">View Services</a>
             </div>
           </div>
         </div>
@@ -329,7 +351,7 @@
               <label for="cf-message" class="font-body text-sm font-medium">Anything else we should know?</label>
               <textarea id="cf-message" name="message" class="flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm font-body min-h-[100px] resize-none" placeholder="Tell us about your goals, challenges, or any questions..."></textarea>
             </div>
-            <button type="submit" class="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-body font-medium text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-60">
+            <button type="submit" class="w-full bg-accent text-accent-foreground py-3.5 rounded-lg font-body font-medium text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-60">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send w-4 h-4"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
               Submit Request
             </button>
@@ -343,9 +365,12 @@
         <div class="max-w-6xl mx-auto">
           <div class="grid md:grid-cols-2 gap-12">
             <div>
-              <div class="flex items-center gap-2.5 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dog w-6 h-6 text-accent"><path d="M11.25 16.25h1.5L12 17z"></path><path d="M16 14v.5"></path><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"></path><path d="M8 14v.5"></path><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5"></path></svg>
-                <span class="font-heading text-lg font-semibold text-background">Sollei Canine Academy</span>
+              <div class="footer-lockup mb-4">
+                <img src="assets/logo-mark.png" alt="" class="footer-mark">
+                <div class="footer-text">
+                  <span class="footer-name font-heading font-semibold text-background">Sollei</span>
+                  <span class="footer-sub font-body text-accent">CANINE ACADEMY</span>
+                </div>
               </div>
               <p class="font-body text-sm leading-relaxed text-background/60">Using balanced, individualized training designed around your dog’s unique personality, temperament, and your lifestyle. Building happier dogs and stronger bonds since 2014.</p>
             </div>
@@ -358,7 +383,7 @@
                 </div>
                 <div class="flex items-center gap-3">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-4 h-4 text-accent"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-                  <span>hello@solleicanineacademy.com</span>
+                  <span>info@solleicanineacademy.com</span>
                 </div>
                 <div class="flex items-center gap-3">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 text-accent"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
