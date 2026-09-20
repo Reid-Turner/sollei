@@ -1,0 +1,7 @@
+# macOS Finder writes one of these into every folder it opens, recording
+# local view settings. Machine-specific, and rewritten just by resizing a
+# Finder window, so it never belongs in the repo.
+.DS_Store
+
+# Hand-made backups taken before a risky edit, e.g. index.html.backup.
+*.backup
